@@ -1,0 +1,298 @@
+\documentclass[a4paper,10pt]{article}
+% Call packages
+\usepackage[utf8x]{inputenc}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{natbib}
+\usepackage{cite}
+\usepackage{amstext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epsfig}
+\usepackage{graphics}
+\usepackage{graphicx}
+
+% Definitions
+\DeclareMathOperator\erf {erf}
+\newcommand{\heavi}{\Theta}
+
+% Title
+\title{Development of a Radiating Model for the Influence on Tropospheric Response of the Characteristics of Heat Forcing }
+\author{O.J. Halliday, S. D. Griffiths, D. J. Parker}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Maths section after SDG edits
+\end{abstract}
+
+\section{Mathematical Model}
+\label{sec_Model}
+%
+From linear governing equations we derive and solve an equation for field variable $w$, 
+using a modal expansion, for a sensible heat forcing with defined spatial and temporal variation.
+We then obtain the corresponding potential temperature response, $b$. 
+Our solution radiates energy at the tropopause and assumes a compressible atmosphere.
+
+Consider small disturbances about a state of rest in an compressible fluid in two dimensions, $(x, z)$,
+within a hydrostatic Boussinesq-like approximation:
+%
+\begin{eqnarray}
+\label{equ_Boussinesq}
+\frac{\partial u}{\partial t}  = - \frac{1}{\rho_0} \frac{\partial p}{\partial x}, \quad
+\frac{g \rho}{\rho_0}  =  - \frac{1}{\rho_0}  \frac{\partial p}{\partial z}, \quad
+\frac{\partial \rho}{\partial t} +  w \frac{d \rho_0}{dz}  =  -Q, \quad
+\frac{\partial u}{\partial x} + \frac{\partial w}{\partial z}  =  0, 
+\end{eqnarray}
+%
+where $(u, w)$ is the perturbation wind vector, $\rho$ the density, $p$ the pressure, $Q$ the thermal forcing and 
+the basic state of density is:
+%
+\begin{equation}
+\rho_0 (z) = \rho_s \exp \left( - \frac{z}{D} \right).
+\end{equation}
+%
+$w$ is subject to the boundary conditions:
+%
+\begin{eqnarray}
+\label{bcs}
+w(z = 0, H) = 0. 
+\end{eqnarray}
+
+Note that the the thermodynamic equation from equations \ref{equ_Boussinesq} may also be written in terms of 
+a buoyancy perturbation as follows (PB):
+%
+\begin{eqnarray}
+\label{equ_b}
+\frac{\partial b }{\partial t} + N^2 = S, \quad S = - \frac{g }{ \rho_0 } Q,
+\end{eqnarray}
+%
+where $b = \frac{g \theta'}{\theta_0}$ is a buoyancy perturbation, $\theta'$ a potential temperature perturbation, 
+$\theta_0$ a reference potential temperature and $N^2 =-\frac{g}{\rho_0}\frac{d \bar{\rho_0}}{dz}$ is the buyancy frequency 
+(see below).
+
+Eliminating variables from equations \ref{equ_Boussinesq} the relationship between  $w$ and $S$ may be obatined:
+%
+\begin{equation}
+\label{equ_vertical_structure}
+\frac{1}{\rho_0} \frac{\partial}{\partial z} \left( \rho_0(z)  \frac{\partial}{\partial z} \frac{\partial^2 w}{\partial t^2} \right)  +N^2 \frac{\partial^2 w}{\partial x^2} = \frac{\partial^2 S}{\partial x^2}.
+\end{equation}
+%
+To solve equation \ref{equ_vertical_structure} for a given heating function $S(x,z,t)$ let us first address the vertical variation of the of the $w$ response. 
+We shall use a modal expansion of fields $w$ and $S$ between rigid lower and upper boundaries at
+ $z=0,H$, with the troposphere (which later will be taken to coincide with the top of heating) corresponding to the restricted range of altitudes:
+%
+\begin{equation}
+0 \leq z \leq H_t, \quad H_t \ll H.
+\end{equation}
+% 
+Similar to equation \ref{equ_vertical_structure} is the following eigenvlaue equation for the free modes:
+%
+\begin{equation}
+\label{equ_free_modes}
+\frac{d}{dz} \left( \rho_0(z) \frac{d \phi_n}{dz} \right) + \frac{N^2 \rho_0(x)}{c_n^2} \phi_n(z) = 0,
+\end{equation}
+%
+with associated boudary conditions:
+%
+\begin{equation}
+\phi_n(0) = \phi_n(H) = 0.
+\end{equation}
+%
+With the above boundary conditions we find solutions and corresponding wavespeeds as follows:
+%
+\begin{equation}
+\phi_n(z) = A \exp \left( \frac{z}{H_t} \right) \sin \left( \frac{n \pi}{H} z\right), \quad c_n = \sqrt{  \frac{4 H^2 H_t^2 N^2 }{H^2 + 4 n^2 \pi^2 H_t^2} }.
+\end{equation}
+%
+These solutions, when used with an approriate metric, have the orthomormaility property:
+%
+\begin{equation}
+\int_0^H\rho_0(z)\phi_n(z) \phi_m(z) dz = \delta_{nm}
+\end{equation}
+%
+provided the normalization constant $A$ is chosen as:
+%
+\begin{equation}
+A = \sqrt{ \frac{2}{ \rho_s H} }.
+\end{equation}
+%
+We shall shortly project the vertical structure of the $w$ response onto the discrete $\phi_n$ above using
+expansions for $S$ and $w$:
+%
+\begin{equation}
+\label{equ_modal}
+w = \sum_i w_i(x,t) \phi_n(z), \quad S = \sum_i s_i(x,t) \phi_n(z). \quad
+\end{equation}
+%
+To avoid differentiating these series, equation \ref{equ_vertical_structure} must first be transformed. 
+Multiply by $\phi_m(z)$ and integrate on $z$ in the range $0\leq z\leq H$ to obtain:
+%
+\begin{equation}
+- \int_0^H  \rho_0 \frac{\partial \phi_m}{\partial z}  \frac{\partial}{\partial z} \frac{\partial^2 w}{\partial t^2}  dz  + N^2  \int_0^H \phi_m \rho_0 \frac{\partial^2 w}{\partial x^2} dz  = \int_0^H  \phi_m \rho_0 \frac{\partial^2 S}{\partial x^2} dz.
+\end{equation}
+%
+Here, integration by parts and the assumed boundary conditions on the $\phi_n$ have been on the first term on the left hand side. A second application of parts with
+$u= \rho_0 \frac{\partial \phi_m}{\partial z} $ and $\frac{dv}{dz} = \frac{\partial}{\partial z} \frac{\partial^2 w}{\partial t^2} $ and the use of equation \ref{equ_free_modes} 
+now yields and equation into which the modal expansions may be substituded:
+%
+\begin{equation}
+- \frac{N_2}{c_n^2} \int_0^H  \rho_0 \phi_m \frac{\partial^2 w}{\partial t^2}  dz  + N^2  \int_0^H \phi_m \rho_0 \frac{\partial^2 w}{\partial x^2} dz  = \int_0^H  \phi_m \rho_0 \frac{\partial^2 S}{\partial x^2} dz.
+\end{equation}
+%
+Substituting the expansions in equation \ref{equ_modal} and using the orhonormaility property of the free modes, we easily obtain an equation for the $w_m$ and $S_m$:
+%
+\begin{equation}
+-  \frac{\partial^2 }{\partial t^2} w_m(x,t)  + c_n^2   \frac{\partial^2 }{\partial x^2} w_m(x,t)   =  \frac{c_n^2 }{N^2} \frac{\partial^2 }{\partial x^2} s_m(x,t).
+\end{equation}
+%
+
+To proceed, we specify a pulsed or transient thermal forcing of finite duration, $T$, which is of separable form, 
+defined over the whole range of vertical co-ordinate:
+%
+\begin{equation}
+\label{equ_heating}
+S(x,z,t) = Q F(x) \left( \heavi(t) - \heavi(t-T) \right) G(z).
+\end{equation}
+%
+Here $\heavi(t)$ is the Heavyside function and $Q$ a calibration constant to be used later. We will shortly define function $G(z)$
+using it to restrict the vertical range of heating to the troposphere.
+%
+%
+%
+\subsection{$w$-Response}
+%
+We derive the vertical velocity of the response induced by the form of thermal forcing specified in equation \ref{equ_heating}
+On making a Fourier transform on horizontal variable $x$, followed by a Laplace transform 
+on variable $t$ to \ref{equ_vertical_structure} and using standard properties of the Fourier and Laplace transforms 
+ (\citep{arfken2013mathematical}) we obtain:
+%
+\begin{eqnarray}
+\tilde{w}_m(k,p) & = & \frac{Q c_n^2 k^2 \tilde{F}(k) }{ N^2 p \left( p + i c_m \right) \left( p-i c_m \right)  } \\ \nonumber
+                        & + &  \frac{Q c_m^2 k^2 \tilde{F}(k)  e^{-pT} }{ N^2 p \left( p + i c_m \right) \left( p-i c_m \right)  }. \\ \nonumber
+\end{eqnarray}
+%
+Here $ \tilde{F}$ denotes the transform of the horizontal variation, $F(x)$. 
+The first term of the right hand side is simiular to Parker and Burton's equation (10) note.
+Using the delay theorem of Laplace transforms on the appropriate partial fraction expansion (\citep{arfken2013mathematical})
+the above may be inverse Laplace transformed. A subsequent Fourier inversion of horizontal wavenumber, $k$, yields
+the flow response to one vertical mode of heating, $\phi_m(z)$:
+%
+\begin{eqnarray}
+\label{equ_PB2}
+w_m(x,t) & = & \frac{Q}{N^2} \left( 1 - \heavi( t-T) \right) F(x) \\ \nonumber
+              & - & \frac{Q}{2N^2} \left(  F(x + c_m t) + F(x - c_m t) \right) \\ \nonumber
+             & + & \frac{Q}{2 N^2} \heavi( t-T) \left( F(x-c_m (t-T)) \right) \\ \nonumber
+            & + & \frac{Q}{2 N^2} \heavi( t-T) \left( F(x+ c_m (t-T))  \right). \\ \nonumber
+\end{eqnarray}
+% 
+A few remarks are now appropriate. The above mode of response holds for any horizontal variation of sensible heating, it 
+contains a horizontal phase speed determined by the vertical wavenumber $c_n$ and a response to steady heating may 
+easily be obtained on setting $T \rightarrow \infty$, when terms with factor $\heavi(t-T)$ disappear. 
+
+To proceed it is necessary to define the vertical variation of the thermal forcing, which is to be restricted to the troposphere as follows:
+%
+\begin{eqnarray}
+\label{equ_heating_defn}
+S_{(n-1)}(x,z,t) & = & Q F(x) \left( \heavi(t) - \heavi(t-T) \right) \\ \nonumber
+           & \times & \sin \left( \frac{n \pi}{H_t} z \right)  (\heavi(z) - \heavi(z-H_t)), \quad \quad n \in \mathbb{Z}^+, \quad T>0.
+\end{eqnarray}
+%
+Here $n$ is the number of half sinusoids of vertical variation of the sensible heating in the troposphere $0\leq z \leq H_t$,
+which has $(n-1)$ tropospheric nodes. Note, the tropopause now coincides with the top of heating i.e. $S_{(n-1)} =0$, $z>H_t$.
+Note also that the tropopause is taken to be identical with the assumed scale height of the troposphere (recall, 
+the base state of density is $\rho(z) = \rho_s \exp \left( - \frac{z}{H_t} \right)$). 
+Figure \ref{heating diagram} below is a schematic representation of the horizontal and vertical variation of the thermal forcing function 
+we use throughout, plotted for $n=1$, corresponding to the gravest mode of heating across the tropopause. 
+In this figure symbol $S_z (z) =  \sin \left( \frac{n \pi}{H_t} z \right) \left( \heavi(z) - \heavi(z-H_t) \right)$.
+%
+% 0
+%
+\begin{figure}[h!]
+\caption{ Not to scale. Diagram of the horizontal and vertical heating variation of our
+	      chosen sensible heating function. 
+              The left (right) panel shows the vertical (horizontal) variation. 
+              The horizontal variation is defined in equation \ref{equ_horizontal_heating}
+              Note that, for the vertical variation, the distance, $z$, (altitude) co-ordinate is vertical. 
+              The vertical variation depicted corresponds to the gravest mode of heating 
+              $n=1$ in the troposphere, between the ground and the tropopause (broken red line). 
+              In the right panel, the standard deviation of the normal distribution is $\sigma$ }
+  \centering
+    \includegraphics[width=1\textwidth]{heating_sketch.eps}
+  \label{heating diagram}
+\end{figure}
+%
+ 
+We project the truncated or confined heating defined in equation \ref{equ_heating_defn} 
+over the eigenfunctions $\phi_m(z)$ 
+%
+\begin{equation}
+\label{equ_1}
+S_{(n-1)} (x,z,t) \approx Q F(x) \left( \heavi(t) - \heavi(t-T) \right) \sum_{i}^{M} s_i (n) \phi_i (z),
+\end{equation}
+%
+where the Fourier coefficients $b_{m_z}(n)$ for the heating defined in equation \ref{equ_heating_defn} are:
+%
+\begin{equation}
+b_{m_z} (n) = \frac{ 2  H_t } { \pi H } (-1)^{(n+1)} \sin \left( \frac{m_z \pi H_t }{ H } \right) \left( \frac{ n H^2 }{ n^2 H^2 - m_z^2 H_t^2 } \right).
+\end{equation}
+%
+Here for example $n=1$ corresponds physically to the gravest mode of heating having zero nodes within the troposphere.
+For the moment take $n=1$. $n=2$ corresponds to the next mode of heating identified by Nicholls as important, which will be considered when we
+turn briefly to low-level cooling. 
+
+Since the vertical structure equation for $w$ is linear, the response forced by the defined in equation \ref{equ_heating_defn}
+may be written as a superposition of solutions \ref{equ_PB2}, weighted by the appropriate Fourier coefficient:
+%
+\begin{eqnarray}
+\label{equ_2}
+\frac{w }{Q} & = & \frac{1}{Q N^2} (1 - \heavi(t-T)) S_0(x,z,0) \\ \nonumber
+& - & \frac{1}{2 N^2}  \sum_{m_z = 1}^{M} b_{m_z} (1)\left(F(x-ct)  + F(x+ct)   \right) \sin \left( \frac{m_z \pi} {H} z\right) \\ \nonumber
+& + & \frac{1}{2 N^2} \heavi(t-T) \sum_{m_z = 1}^{M} b_{m_z} (1) F(x-c(t-T))  \sin \left( \frac{m_z \pi} {H} z\right), \\ \nonumber
+& + & \frac{1}{2 N^2} \heavi(t-T) \sum_{m_z = 1}^{M} b_{m_z} (1) F(x+c(t-T))  \sin \left( \frac{m_z \pi} {H} z\right), \\ \nonumber
+\end{eqnarray}
+%
+where of course:
+%
+\begin{equation}
+c = \frac{NH}{\pi m_z}, \quad S_0 (x,z,0) = Q F(x) \sum_{m_z=1}^{M} b_{m_z} (1) \sin \left( \frac{m_z \pi} {H} z\right).
+\end{equation}
+%
+Note that equation \ref{equ_1} may now be written as follows:
+%
+\begin{equation}
+S_{0}(x,z,t) = (1 - \heavi(t-T) ) S_0(x,z,0).
+ \end{equation}
+%
+%
+%
+
+
+
+
+%
+%
+%
+\subsection{moved stuff}
+...
+Note that equations for field variables other than $w$ are not so suitable for the 
+forthcoming application of Fourier and Laplace transform techniques (\citep{arfken2013mathematical}). Furthermore,
+vertical motion is generally regarded as critical for the convection triggering and analysis of gravity waves 
+which is the essential purpose of this study. 
+
+...
+Defining the horizontal variation of heating as:
+%
+\begin{equation}
+\label{equ_horizontal_heating}
+F(x) = \frac{1}{\sigma^\eta}\exp \left( -\frac{x^2}{2 \sigma^2} \right), \quad k =0,1,
+\end{equation}
+%
+In the above, $\sigma$ is the width parameter for the horizontal variation of heating. Factor $\frac{1}{\sigma}$ 
+ensures that total heating rate remains constant as $\sigma$ varies. We set switch parameter $\eta=0$ until further notice. 
+Shortly we will define a more realistic, localised sensible heating. 
+
+
+
+
+\end{document}
