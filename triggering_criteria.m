@@ -6,14 +6,14 @@ fs2     = 12;
 
 HL_bar       = 63.993 ;
 HV_bar       = 1.50;
-Ht_bar       = 1.01;
+Ht_bar       = 1.0;
 x_0          = 0;
-dx           = 0.01;
+dx           = 1;
 x1           = [-50:dx:50];
 t1           = [0:450:14400];
 [xx1, tt]    = meshgrid(x1,  t1);
 N            = 0.01;
-mmax         = 500;
+scalar       = 250;
 
 %Compute first heating
 t = 0;
@@ -21,11 +21,11 @@ for i = 1:1:32
     sigma       = 1;
     T           = 3600;
     alpha       = 1;
-    [ xx, zz, ww, bb ] = series_half_sinusoid_plots_3_copy_no_checks(HL_bar , HV_bar, Ht_bar, t, T, mmax );
+    [ xx, zz, ww, bb ] = series_half_sinusoid_plots_3_copy_no_checks(HL_bar , HV_bar, Ht_bar, t, T, scalar * HL_bar );
     % w
-    w_ext0               = ww(20,:);
+    w_ext0               = ww(2,:);
     w_trop0(i,:)         = w_ext0(:);
-    w_ext1               = ww(50,:);
+    w_ext1               = ww(5,:);
     w_trop1(i,:)         = w_ext1(:);
 %     w_ext2               = ww(50,:);
 %     w_trop2(i,:)         = w_ext2(:);
@@ -33,9 +33,9 @@ for i = 1:1:32
 %     w_trop3(i,:)         = w_ext3(:);
     
     % PT
-    b_ext0               = bb(20,:);
+    b_ext0               = bb(2,:);
     b_trop0(i,:)         = b_ext0(:);
-    b_ext1               = bb(50,:);
+    b_ext1               = bb(5,:);
     b_trop1(i,:)         = b_ext1(:);
 %     b_ext2               = bb(50,:);
 %     b_trop2(i,:)         = b_ext2(:);
@@ -51,12 +51,12 @@ for k = 1:1:32
    sigma       = 1;
    T           = 900;
    alpha       = 1; % scaling factor to conserve heating
-   [ xx, zz, ww, bb ] = series_half_sinusoid_plots_3_copy_no_checks(HL_bar , HV_bar, Ht_bar, t, T, mmax ); 
+   [ xx, zz, ww, bb ] = series_half_sinusoid_plots_3_copy_no_checks(HL_bar , HV_bar, Ht_bar, t, T, scalar * HL_bar ); 
    % w
    w = alpha * ww;
-   w_ext0p               = ww(20,:);
+   w_ext0p               = ww(2,:);
    w_trop0p(k,:)         = w_ext0p(:);
-   w_ext1p               = ww(50,:);
+   w_ext1p               = ww(5,:);
    w_trop1p(k,:)         = w_ext1p(:);
 %    w_ext2p               = ww(50,:);
 %    w_trop2p(k,:)         = w_ext2p(:);
@@ -65,9 +65,9 @@ for k = 1:1:32
    
    % PT
    bb          = alpha * bb;
-   b_ext0p               = bb(20,:);
+   b_ext0p               = bb(2,:);
    b_trop0p(k,:)         = b_ext0p(:);
-   b_ext1p               = bb(50,:);
+   b_ext1p               = bb(5,:);
    b_trop1p(k,:)         = b_ext1p(:);
 %    b_ext2p               = bb(50,:);
 %    b_trop2p(k,:)         = b_ext2p(:);
@@ -140,21 +140,6 @@ for k = 1:32
     end
 end
 
-% figure(1)
-% h(1) = subplot('Position', [0.1, 0.1, 0.35, 0.8]);
-% surf(xx1,tt,criteria_array_0);
-% xlim([-50 50])
-% ylim([0 14400])
-% text(-45,4000, '2km', 'FontSize',fs2, 'EdgeColor', 'k','BackgroundColor' , 'y')
-% colormap(jet)
-% 
-% h(2) = subplot('Position', [0.6, 0.1, 0.35, 0.8]);
-% surf(xx1,tt,criteria_array_1);
-% xlim([-50 50])
-% ylim([0 14400])
-% text(-45,4000, '5km', 'FontSize',fs2, 'EdgeColor', 'k','BackgroundColor' , 'y')
-% colormap(jet)
-
 
 
 figure(2)
@@ -164,7 +149,7 @@ imagesc(criteria_array_0);
 xlim([0 100])
 ylim([0 32])
 text(-45,4000, '2km', 'FontSize',fs2, 'EdgeColor', 'k','BackgroundColor' , 'y')
-
+text(-45,2000, '(h)', 'FontSize',fs2, 'EdgeColor', 'k','BackgroundColor' , 'w')
 
 h(2) = subplot('Position', [0.5, 0.1, 0.35, 0.8]);
 criteria_array_1 = flipud(criteria_array_1);
@@ -173,27 +158,14 @@ xlim([0 100])
 ylim([0 32])
 text(-45,4000, '2km', 'FontSize',fs2, 'EdgeColor', 'k','BackgroundColor' , 'y')
 s2Pos = get(h(2),'position');
+colormap(jet(4))
 hb = colorbar('location','eastoutside');
 caxis([0 1])
-%set(hb, 'YTick', []);
+set(hb, 'YTick', []);
 set(h(2),'position',s2Pos);
+text(-45,2000, '(h)', 'FontSize',fs2, 'EdgeColor', 'k','BackgroundColor' , 'w')
 
 
-
-% figure(3)
-% delta_w0 = delta_w0 + 3;
-% delta_b0 = delta_b0 + 6;
-% surf(delta_w0);
-% colormap(jet)
-% hold on
-% surf(delta_b0);
-% colormap(jet)
-% imagesc(criteria_array_0);
-% colormap(jet)
-% %xlim([-50 50])
-% %ylim([0 14400])
-% text(-45,4000, '2km', 'FontSize',fs2, 'EdgeColor', 'k','BackgroundColor' , 'y')
-% colormap(jet)
 
 
 
