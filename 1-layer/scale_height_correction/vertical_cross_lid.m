@@ -3,11 +3,12 @@ function [bb] = vertical_cross_lid()
 fs1   = 18;
 fs2   = 14;
 
-t        = 900;
-T        = 1800;  % secs
-sigma    = 1;     % multiplies reference value \sigma_0 i.e. sigma = 3 means sigma = 3 \sigma_0
+t       = 900;
+T       = 1800;  % secs
+sigma   = 1;     % multiplies reference value \sigma_0 i.e. sigma = 3 means sigma = 3 \sigma_0
 Ht_bar   = 1.0021;
 Scaler   = 128;
+sigma   = 1;     % multiplies reference value \sigma_0 i.e. sigma = 3 means sigma = 3 \sigma_0
 
 figure(2)
 
