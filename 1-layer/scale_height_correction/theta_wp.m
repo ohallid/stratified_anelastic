@@ -1,4 +1,4 @@
-function [bb1, bb2, delta_bb] = theta_w()
+function [bb1, bb2, delta_bb] = theta_wp()
 
 Scaler  = 128;
 HV_bar  = 1;
